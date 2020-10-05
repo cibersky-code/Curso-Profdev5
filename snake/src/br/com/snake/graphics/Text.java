@@ -26,68 +26,35 @@ package br.com.snake.graphics;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
-import java.util.ArrayList;
-import java.util.List;
 
-import br.com.snake.core.Direction;
+public abstract class Text extends Drawable {
+	private String text;
+	private Point location;
 
-public abstract class Shape extends Drawable {
-	private List<Rect> rects;
-
-	public Shape(Color color) {
+	public Text(String text, Point location, Color color) {
 		super(color);
-		rects = new ArrayList<>();
-	}
-
-	public List<Rect> getRects() {
-		return rects;
+		this.text = text;
+		this.location = location;
 	}
 	
-	public Rect getRect(int index) {
-		return rects.get(index);
+	public String getText() {
+		return text;
 	}
 	
-	public Rect getFirstRect() {
-		return rects.get(0);
+	public void setText(String text) {
+		this.text = text;
 	}
 	
-	public Rect getLastRect() {
-		return rects.get(rects.size() - 1);
+	public Point getlocation() {
+		return location;
 	}
 	
-	public void addRect(Rect rect) {
-		rect.setColor(getColor());
-		rects.add(rect);
-	}
-	
-	public int size() {
-		return rects.size();
-	}
-	
-	public Rect duplicateRect(Rect baseRect, Direction direction) {
-		int baseX = (int) baseRect.getLocation().getX();
-		int baseY = (int) baseRect.getLocation().getY();
-		int baseWidth = (int) baseRect.getDimension().getWidth();
-		int baseHeight = (int) baseRect.getDimension().getHeight();
-		
-		Point p = new Point(baseX + direction.getSgnX() * baseWidth, baseY + direction.getSgnY() * baseHeight);
-		return new Rect(p, baseRect.getDimension());
-	}
-	
-	public boolean intersects(Rect other) {
-		for (Rect rect : rects) {
-			if (rect.intersects(other)) {
-				return true;
-			}
-		}
-		
-		return false;
+	public void setlocation(Point location) {
+		this.location = location;
 	}
 	
 	@Override
 	public void draw(Graphics g) {
-		for (Rect rect : rects) {
-			rect.draw(g);
-		}
+		g.drawString(text, (int) location.getX(), (int) location.getY());
 	}
 }

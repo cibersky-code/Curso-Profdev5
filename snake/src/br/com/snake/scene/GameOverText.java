@@ -23,13 +23,12 @@
  *******************************************************************************/
 package br.com.snake.scene;
 
-import br.com.snake.graphics.Rect;
+import br.com.snake.graphics.Text;
 import br.com.snake.util.Constants;
 
-public class Background extends Rect {
+public class GameOverText extends Text {
 
-	public Background() {
-		super(0, 0, Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT);
-		setColor(Constants.BACKGROUND_COLOR);
+	public GameOverText(int score) {
+		super(String.format(Constants.GAME_OVER_TEXT, score), Constants.GAME_OVER_location, Constants.GAME_OVER_COLOR);
 	}
 }
